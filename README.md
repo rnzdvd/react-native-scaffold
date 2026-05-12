@@ -13,17 +13,10 @@ npx github:rnzdvd/react-native-scaffold
 Then initialize the project:
 
 ```bash
-<<<<<<< HEAD
-yarn setup
-```
-
-`yarn setup` will ask:
-=======
 node scripts/setup.js
 ```
 
 `scripts/setup.js` will ask:
->>>>>>> refs/remotes/origin/master
 
 ```
 What type of React Native project is this?
