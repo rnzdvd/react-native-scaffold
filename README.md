@@ -1,10 +1,14 @@
- # react-native-scaffold
+# React Native Clean Architecture Scaffold
 
-  > Pulls the TemplatedRN Clean Architecture tooling into any React Native or Expo project in one command.
+  A React Native project template enforcing strict Clean Architecture across all feature modules.
 
-  ## Usage
+  **Stack:** TypeScript · MobX · React Navigation · apisauce · React Native Paper · React Hook Form + Zod · hygen
 
-  Run from your **new project root:**
+  ---
+
+  ## Using this as a scaffold
+
+  Run this from your **new project root:**
 
   ```bash
   npx github:rnzdvd/react-native-scaffold
@@ -21,34 +25,61 @@
 
   The setup script scaffolds all boilerplate and wires up your package.json scripts automatically.
 
-  What gets pulled
+  ---
+  What the scaffold copies into your project
 
   ┌─────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │      Path       │                                              Purpose                                               │
   ├─────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┤
   │ _templates/     │ hygen generators — component, screen, usecase, controller, presenter, gateway, repo, store, entity │
   ├─────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ CLAUDE.md       │ Claude Code architecture guide                                                                     │
+  ├─────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┤
   │ .claude/skills/ │ Claude Code skill definitions for UI generation and API wiring                                     │
   ├─────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┤
   │ scripts/        │ Setup script                                                                                       │
   └─────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-  After setup
+  ---
+  After scaffolding
 
-  yarn          # install dependencies
+  # 1. Install dependencies
+  yarn
+
+  # 2. Start the app
   yarn start    # Metro bundler
   yarn android  # run on Android
   yarn ios      # run on iOS
 
-  ▎ See CLAUDE.md (added by setup) for the full convention guide and code generation commands.
+  ---
+  Architecture
+
+  View (pure UI, props only)
+    ↑ props
+  Container (Observer, wires controller + presenter)
+    ↓ calls                          ↑ reads
+  Controller (orchestrates usecases)   Presenter (reads store, read-only)
+    ↓ calls                               ↑ reads
+  UseCase (business logic)             Store (MobX observable state)
+    ↓ calls               ↓ calls          ↑ runInAction
+  ApiGateway (HTTP)    Repository (writes to store)
+
+  Every feature is scaffolded with hygen generators — never write boilerplate by hand.
+
+  yarn component    # Creates container.tsx + view.tsx
+  yarn screen       # Creates screen.tsx
+  yarn case         # Creates usecase.ts + test.ts
+  yarn controller   # Creates controller.ts
+  yarn presenter    # Creates presenter.ts
+  yarn gateway      # Creates <module>.gateway.ts
+  yarn repo         # Creates repository.ts
+  yarn store        # Creates store.ts
+  yarn entity       # Creates entity.ts
+  yarn container    # Creates container.tsx only
+
+  ▎ See CLAUDE.md for the full convention guide.
 
   Requirements
 
   - Node >= 22.11.0
   - yarn
-
-  Key changes:
-  - Replaced `---` dividers with clean header spacing — renders better on GitHub
-  - Added `>` blockquote for the description and the `CLAUDE.md` tip — visually distinct without being loud
-  - Collapsed **After setup** commands into a single block — cleaner than separate blocks
-  - Moved **Requirements** to the bottom — it's a pre-check, not the main story
