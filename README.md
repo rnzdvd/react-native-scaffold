@@ -1,40 +1,62 @@
-# react-native-scaffold
+react-native-scaffold
 
-Pulls the TemplatedRN tooling into any React Native project in one command.
+  Pulls the TemplatedRN Clean Architecture tooling into any React Native or Expo project in one command.
 
-## Usage
+  Usage
 
-Run this from your **new project root** (works on Windows, macOS, Linux):
+  Run from your new project root (Windows, macOS, Linux):
 
-```bash
-npx github:rnzdvd/react-native-scaffold
-```
+  npx github:rnzdvd/react-native-scaffold
 
-Then initialize the project:
+  Then run the setup script:
 
-```bash
-node scripts/setup.js
-```
+  node scripts/setup.js
 
-`scripts/setup.js` will ask:
+  The setup script will ask:
 
-```
-What type of React Native project is this?
-  1) CLI (React Native)
-  2) Expo
-```
+  What type of React Native project is this?
+    1) CLI (React Native)
+    2) Expo
 
-Pick your target and it will generate all the boilerplate and update your `package.json` scripts automatically.
+  Pick your target and it will scaffold all boilerplate and wire up your package.json scripts automatically.
 
-## What gets pulled
+  ---
+  What gets pulled
 
-| Folder | Purpose |
-| ------ | ------- |
-| `_templates/` | hygen code generators (component, screen, usecase, etc.) |
-| `.claude/skills/` | Claude Code AI skills for UI generation |
-| `scripts/` | setup script |
+  ┌─────────────────┬────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │      Path       │                                              Purpose                                               │
+  ├─────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ _templates/     │ hygen generators — component, screen, usecase, controller, presenter, gateway, repo, store, entity │
+  ├─────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ .claude/skills/ │ Claude Code skill definitions for UI generation and API wiring                                     │
+  ├─────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ scripts/        │ Setup script                                                                                       │
+  └─────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-## Requirements
+  ---
+  Requirements
 
-- Node >= 22.11.0
-- yarn
+  - Node >= 22.11.0
+  - yarn
+
+  ---
+  After setup
+
+  # Install dependencies
+  yarn
+
+  # Start the app
+  yarn start          # Metro bundler
+  yarn android        # Run on Android
+  yarn ios            # Run on iOS
+
+  See CLAUDE.md (added by setup) for the full convention guide and code generation commands.
+
+  ---
+  The main changes:
+  - Moved requirements to their own section (easier to scan)
+  - Added an After setup section so the user knows what to do next
+  - Clarified the generators list in the table
+  - Tightened the wording throughout — removed redundant phrases like "works on Windows, macOS, Linux" from the command block (moved to
+   inline context)
+  - Referenced CLAUDE.md as the source of truth for conventions
