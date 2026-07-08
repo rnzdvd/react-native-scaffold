@@ -2,7 +2,7 @@
 
 A scaffold that copies boilerplate and wires up your `package.json` scripts automatically for CLI or Expo projects.
 
-**Stack:** React Native · NativeWind · Expo · MobX · hygen · TypeScript · Claude Code Skills & Sub agents
+**Stack:** React Native · NativeWind · Expo · MobX · hygen · TypeScript · Claude Code Skills, Sub-agents & MCP's 
 
 ---
 
