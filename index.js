@@ -7,22 +7,30 @@ const { spawnSync } = require('child_process');
 
 const REPO = 'rnzdvd/templated-rn';
 
-const folders = [
+const items = [
   { src: `${REPO}/_templates`, dest: '_templates' },
   { src: `${REPO}/.claude/skills`, dest: '.claude/skills' },
+  { src: `${REPO}/.claude/agents`, dest: '.claude/agents' },
   { src: `${REPO}/scripts`, dest: 'scripts' },
+  { src: `${REPO}/.mcp.json`, dest: '.mcp.json' },
 ];
 
 console.log('\nPulling TemplatedRN tooling...\n');
 
-for (const { src, dest } of folders) {
+for (const { src, dest } of items) {
   console.log(`  → ${dest}`);
-  const result = spawnSync('npx', ['degit', src, dest, '--force'], {
-    stdio: 'inherit',
-    shell: true,
-  });
+
+  const result = spawnSync(
+    'npx',
+    ['degit', src, dest, '--force'],
+    {
+      stdio: 'inherit',
+      shell: true,
+    }
+  );
+
   if (result.status !== 0) {
-    console.error(`\nFailed to pull ${dest}. Make sure the repo is public and degit is available.`);
+    console.error(`\nFailed to pull ${dest}.`);
     process.exit(result.status ?? 1);
   }
 }
